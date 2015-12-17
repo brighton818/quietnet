@@ -1,3 +1,4 @@
+# The below chunk is setting the algorithm to encrypt a file.
 psk = {
 " "  :"1",
 "!" :"111111111",
@@ -96,16 +97,20 @@ psk = {
 '~'   :"1011010111",
 }
 
+
+# The below chunk of commands is decoding psk in specialized in k and v.
 decode_psk = {}
 for k, v in psk.items():
     decode_psk[v] = k
 
+# The below chunk is giving a function to encode a string to an encrypted file.
 def encode(string):
     result = []
     for c in string:
         result.append(psk[c])
     return '00'.join(result) + '00'
 
+# The below chunk is giving a function to decode a string to be a decrypted file that the other person who is receiving can read the file.
 def decode(string):
     try:
         return decode_psk[''.join([str(i) for i in string])]
